@@ -1,22 +1,66 @@
+/* Perfect Glassmorphism Add Expense Form */
 .add-expense-container {
   max-width: 600px;
   margin: 0 auto;
   padding: 2rem;
-  background: rgba(58, 53, 53, 0.186);
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease-out;
+}
+
+.add-expense-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  padding: 2.5rem;
+  box-shadow: 0 16px 64px rgba(31, 38, 135, 0.37);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.add-expense-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0.8;
+  pointer-events: none;
+  border-radius: 24px;
+}
+
+.add-expense-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 80px rgba(31, 38, 135, 0.5);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .add-expense-container h2 {
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.9) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  letter-spacing: -0.5px;
 }
 
+/* Perfect Glassmorphism Form */
 .expense-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .form-group {
@@ -26,26 +70,94 @@
 }
 
 .form-group label {
-  font-weight: 500;
-  color: #2c3e50;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
+/* Perfect Glassmorphism Input Styles */
 .form-group input,
 .form-group select {
-  padding: 0.75rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  color: rgba(255, 255, 255, 0.95);
   font-size: 1rem;
-  transition: border-color 0.2s ease;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(31, 38, 135, 0.2);
+  outline: none;
+  font-family: inherit;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+  transition: all 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  transform: translateY(-2px);
 }
 
+.form-group input:focus::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Enhanced Select Styling with Perfect Visibility */
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: 
+    linear-gradient(45deg, transparent 50%, rgba(255, 255, 255, 0.8) 50%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.8) 50%, transparent 50%);
+  background-position: 
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px);
+  background-size: 
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* Critical Fix for Dropdown Visibility */
+.form-group select option {
+  background: rgba(31, 38, 135, 0.95);
+  color: rgba(255, 255, 255, 0.95);
+  padding: 0.75rem;
+  border: none;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+/* Alternative styling for better browser compatibility */
+.form-group select:focus option {
+  background: #1f2687;
+  color: #ffffff;
+}
+
+/* Webkit specific option styling */
+.form-group select option:checked {
+  background: rgba(74, 144, 226, 0.8);
+  color: #ffffff;
+}
+
+.form-group select option:hover {
+  background: rgba(74, 144, 226, 0.6);
+  color: #ffffff;
+}
+
+/* Perfect Glassmorphism Form Actions */
 .form-actions {
   display: flex;
   gap: 1rem;
@@ -53,65 +165,171 @@
   margin-top: 1rem;
 }
 
-.submit-button,
-.cancel-button {
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 6px;
-  font-weight: 500;
+/* Perfect Glassmorphism Button Styles */
+.submit-button {
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.8), rgba(39, 174, 96, 0.8));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  padding: 1rem 2rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.submit-button {
-  background-color: #3498db;
-  color: white;
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
 }
 
 .submit-button:hover {
-  background-color: #2980b9;
+  background: linear-gradient(135deg, rgba(46, 204, 113, 0.9), rgba(39, 174, 96, 0.9));
+  transform: translateY(-3px);
+  box-shadow: 0 16px 64px rgba(31, 38, 135, 0.5);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.submit-button:hover::before {
+  opacity: 1;
 }
 
 .submit-button:disabled {
-  background-color: #bdc3c7;
+  opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+  pointer-events: none;
 }
 
 .cancel-button {
-  background-color: #e74c3c;
-  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 16px;
+  padding: 1rem 2rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
 }
 
 .cancel-button:hover {
-  background-color: #c0392b;
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 64px rgba(31, 38, 135, 0.5);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
+.cancel-button:hover::before {
+  opacity: 1;
+}
+
+/* Perfect Glassmorphism Error Message */
 .error-message {
-  background-color: #fee2e2;
-  color: #dc2626;
+  background: rgba(255, 107, 107, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  border-radius: 16px;
   padding: 1rem;
-  border-radius: 6px;
+  color: rgba(255, 107, 107, 0.95);
+  font-size: 0.95rem;
+  font-weight: 600;
   margin-bottom: 1rem;
   text-align: center;
+  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.2);
+  position: relative;
+  z-index: 1;
 }
 
-/* Loading state */
+/* Perfect Glassmorphism Loading State */
 .loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 200px;
+  min-height: 300px;
   gap: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0.8;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
+.loading-container p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #3498db;
+  border: 4px solid rgba(255, 255, 255, 0.2);
+  border-top: 4px solid rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   animation: spin 1s linear infinite;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes spin {
@@ -119,11 +337,35 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive design */
-@media (max-width: 640px) {
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .add-expense-container {
     padding: 1rem;
-    margin: 0.5rem;
+  }
+
+  .add-expense-card {
+    padding: 2rem;
+  }
+
+  .add-expense-container h2 {
+    font-size: 1.75rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.875rem 1rem;
+    font-size: 0.95rem;
   }
 
   .form-actions {
@@ -133,5 +375,37 @@
   .submit-button,
   .cancel-button {
     width: 100%;
+    padding: 0.875rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-expense-container {
+    padding: 0.75rem;
+  }
+
+  .add-expense-card {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .add-expense-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.9rem;
+    border-radius: 14px;
+  }
+
+  .submit-button,
+  .cancel-button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    border-radius: 14px;
   }
 }

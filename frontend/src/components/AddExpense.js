@@ -64,84 +64,90 @@ const AddExpense = () => {
 
   return (
     <div className="add-expense-container">
-      <h2>Add New Expense</h2>
-      {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleSubmit} className="expense-form">
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-            placeholder="Enter expense description"
-          />
-        </div>
+      <div className="add-expense-card">
+        <h2>Add New Expense</h2>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit} className="expense-form">
+          <div className="form-group">
+            <label htmlFor="description">Description</label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              required
+              placeholder="Enter expense description"
+              className="form-input"
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="amount">Amount</label>
-          <input
-            type="number"
-            id="amount"
-            name="amount"
-            value={formData.amount}
-            onChange={handleChange}
-            required
-            min="0"
-            step="0.01"
-            placeholder="Enter amount"
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="amount">Amount</label>
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              value={formData.amount}
+              onChange={handleChange}
+              required
+              min="0"
+              step="0.01"
+              placeholder="Enter amount"
+              className="form-input"
+            />
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="category">Category</label>
-          <select
-            id="category"
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select a category</option>
-            {categories.map(category => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
+          <div className="form-group">
+            <label htmlFor="category">Category</label>
+            <select
+              id="category"
+              name="category"
+              value={formData.category}
+              onChange={handleChange}
+              required
+              className="form-select"
+            >
+              <option value="">Select a category</option>
+              {categories.map(category => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          <div className="form-group">
+            <label htmlFor="date">Date</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+              className="form-input"
+            />
+          </div>
 
-        <div className="form-actions">
-          <button 
-            type="button" 
-            onClick={() => navigate('/expenses')}
-            className="cancel-button"
-          >
-            Cancel
-          </button>
-          <button 
-            type="submit" 
-            className="submit-button"
-            disabled={loading}
-          >
-            Add Expense
-          </button>
-        </div>
-      </form>
+          <div className="form-actions">
+            <button 
+              type="button" 
+              onClick={() => navigate('/expenses')}
+              className="cancel-button"
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit" 
+              className="submit-button"
+              disabled={loading}
+            >
+              Add Expense
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
