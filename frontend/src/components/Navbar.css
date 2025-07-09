@@ -4,11 +4,11 @@
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   transition: all 0.3s ease;
   height: auto;
@@ -16,11 +16,11 @@
 }
 
 .navbar-scrolled {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .navbar-content {
@@ -83,8 +83,8 @@
   position: relative;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
   white-space: nowrap;
 }
 
@@ -95,7 +95,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   border-radius: 12px;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -108,17 +108,17 @@
 
 .nav-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 1);
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-link.active {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 1);
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
   font-weight: 700;
 }
 
@@ -127,20 +127,20 @@
   align-items: center;
   gap: 1rem;
   padding: 0.75rem 1.25rem;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
 }
 
 .user-info:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.08);
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 
 .user-email {
@@ -174,16 +174,16 @@
   height: 26px;
   border-radius: 50%;
   padding: 2px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .logout-btn {
   padding: 0.7rem 1.3rem;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(238, 82, 83, 0.8));
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.7), rgba(238, 82, 83, 0.7));
   color: rgba(255, 255, 255, 0.95);
   font-weight: 700;
   cursor: pointer;
@@ -191,16 +191,16 @@
   font-size: 0.9rem;
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
   white-space: nowrap;
 }
 
 .logout-btn:hover {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 1), rgba(238, 82, 83, 1));
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.9), rgba(238, 82, 83, 0.9));
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 /* Mobile Responsive Design */

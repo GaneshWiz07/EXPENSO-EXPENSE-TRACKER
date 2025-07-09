@@ -8,12 +8,12 @@
   --warning-color: #ff9f1c;
   
   /* Glassmorphism Backgrounds */
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-bg-hover: rgba(255, 255, 255, 0.15);
-  --glass-bg-active: rgba(255, 255, 255, 0.2);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-hover: rgba(255, 255, 255, 0.08);
+  --glass-bg-active: rgba(255, 255, 255, 0.12);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --glass-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.18);
   
   /* Text Colors for Glass */
   --text-color: rgba(255, 255, 255, 0.95);
@@ -61,7 +61,7 @@
   box-sizing: border-box;
 }
 
-/* Smooth Mesh Gradient Background */
+/* Improved Background Animation */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   min-height: 100vh;
@@ -71,34 +71,59 @@ body {
   letter-spacing: 0.02em;
   position: relative;
   
-  /* Smooth Mesh Gradient Background */
-  background: linear-gradient(-45deg, 
-    #6366f1, #8b5cf6, #d946ef, #ec4899, 
-    #f97316, #eab308, #22c55e, #06b6d4);
-  background-size: 400% 400%;
-  animation: meshGradient 12s ease infinite;
+  /* Animated Orb Background */
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(119, 198, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 90% 80%, rgba(198, 255, 119, 0.3) 0%, transparent 50%),
+    linear-gradient(135deg, #0f0c29 0%, #302b63 25%, #24243e 50%, #2b5876 75%, #4e4376 100%);
+  background-size: 
+    600px 600px,
+    400px 400px, 
+    500px 500px,
+    300px 300px,
+    100% 100%;
+  animation: orbMove 20s ease-in-out infinite;
 }
 
-/* Smooth mesh gradient animation */
-@keyframes meshGradient {
-  0% {
-    background-position: 0% 50%;
+/* Smooth orb movement animation */
+@keyframes orbMove {
+  0%, 100% {
+    background-position: 
+      20% 50%,
+      80% 20%,
+      40% 80%,
+      90% 80%,
+      0% 0%;
   }
   25% {
-    background-position: 100% 25%;
+    background-position: 
+      30% 60%,
+      70% 30%,
+      50% 70%,
+      80% 90%,
+      0% 0%;
   }
   50% {
-    background-position: 100% 100%;
+    background-position: 
+      80% 70%,
+      20% 80%,
+      60% 20%,
+      10% 10%,
+      0% 0%;
   }
   75% {
-    background-position: 0% 75%;
-  }
-  100% {
-    background-position: 0% 50%;
+    background-position: 
+      70% 30%,
+      30% 70%,
+      20% 60%,
+      90% 20%,
+      0% 0%;
   }
 }
 
-/* Floating mesh particles overlay */
+/* Subtle overlay particles */
 body::before {
   content: '';
   position: fixed;
@@ -107,27 +132,23 @@ body::before {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 85% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
-  animation: floatMesh 20s ease-in-out infinite;
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.03) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 20%),
+    radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.02) 0%, transparent 20%),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 20%);
+  animation: particleFloat 15s ease-in-out infinite;
   pointer-events: none;
   z-index: -1;
 }
 
-@keyframes floatMesh {
+@keyframes particleFloat {
   0%, 100% { 
     transform: translateY(0px) scale(1);
-    opacity: 1;
+    opacity: 0.6;
   }
-  33% { 
-    transform: translateY(-15px) scale(1.02);
+  50% { 
+    transform: translateY(-20px) scale(1.1);
     opacity: 0.8;
-  }
-  66% { 
-    transform: translateY(10px) scale(0.98);
-    opacity: 0.9;
   }
 }
 
@@ -205,7 +226,7 @@ html {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -215,7 +236,7 @@ html {
   transform: translateY(-8px);
   background: var(--glass-bg-hover);
   box-shadow: var(--glass-shadow-hover);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .card:hover::before {
