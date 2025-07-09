@@ -53,10 +53,7 @@
 }
 
 .navbar-logo span {
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: rgba(255, 255, 255, 0.95);
   letter-spacing: 1px;
 }
 
@@ -82,13 +79,17 @@
 }
 
 .nav-link::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   border-radius: 12px;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -171,7 +172,11 @@
   padding: 0.6rem 1.2rem;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(238, 82, 83, 0.8));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.8),
+    rgba(238, 82, 83, 0.8)
+  );
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -184,7 +189,11 @@
 }
 
 .logout-btn:hover {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 1), rgba(238, 82, 83, 1));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 1),
+    rgba(238, 82, 83, 1)
+  );
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
 }

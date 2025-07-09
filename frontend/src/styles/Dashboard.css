@@ -15,10 +15,6 @@
   font-weight: 700;
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   letter-spacing: 1px;
 }
 
@@ -43,13 +39,17 @@
 }
 
 .stat-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -142,13 +142,17 @@
 }
 
 .chart-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.02)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -186,13 +190,17 @@
 }
 
 .recent-expenses::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.02)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -238,13 +246,17 @@
 }
 
 .expense-item::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -317,8 +329,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Enhanced Error State */
@@ -337,13 +353,17 @@
 }
 
 .dashboard-error::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 107, 107, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.1),
+    rgba(255, 107, 107, 0.05)
+  );
   opacity: 0.5;
   pointer-events: none;
 }
@@ -364,7 +384,11 @@
 }
 
 .retry-button {
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.8), rgba(72, 219, 251, 0.8));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.8),
+    rgba(72, 219, 251, 0.8)
+  );
   color: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(74, 144, 226, 0.3);
   padding: 0.75rem 2rem;
@@ -380,7 +404,11 @@
 }
 
 .retry-button:hover {
-  background: linear-gradient(135deg, rgba(74, 144, 226, 1), rgba(72, 219, 251, 1));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 1),
+    rgba(72, 219, 251, 1)
+  );
   border-color: rgba(74, 144, 226, 0.5);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
@@ -395,7 +423,7 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-  
+
   .stat-card {
     padding: 1.5rem;
     margin-bottom: 0;
