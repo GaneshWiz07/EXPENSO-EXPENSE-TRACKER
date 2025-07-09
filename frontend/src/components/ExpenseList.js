@@ -55,6 +55,7 @@ const ExpenseList = () => {
     "Credit Card",
     "Debit Card",
     "Bank Transfer",
+    "Digital Wallet",
     "Other",
   ];
 
@@ -562,6 +563,11 @@ const ExpenseList = () => {
 
     if (!currentExpense) return;
 
+    // Clear any existing success message timeouts
+    if (window.successMessageTimeout) {
+      clearTimeout(window.successMessageTimeout);
+    }
+
     try {
       setLoading(true);
       setErrorMessage("");
@@ -589,9 +595,14 @@ const ExpenseList = () => {
       await fetchMonthlyReport();
 
       // Clear success message after 3 seconds
-      setTimeout(() => {
+      window.successMessageTimeout = setTimeout(() => {
         setSuccessMessage("");
       }, 3000);
+
+      // Force clear the message after 3.5 seconds as a backup
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3500);
     } catch (err) {
       console.error("Update expense error:", err);
       setErrorMessage("Failed to update expense. Please try again.");
@@ -603,6 +614,11 @@ const ExpenseList = () => {
   const handleDelete = async (expenseId) => {
     if (!window.confirm("Are you sure you want to delete this expense?")) {
       return;
+    }
+
+    // Clear any existing success message timeouts
+    if (window.successMessageTimeout) {
+      clearTimeout(window.successMessageTimeout);
     }
 
     try {
@@ -626,9 +642,14 @@ const ExpenseList = () => {
       await fetchMonthlyReport();
 
       // Clear success message after 3 seconds
-      setTimeout(() => {
+      window.successMessageTimeout = setTimeout(() => {
         setSuccessMessage("");
       }, 3000);
+
+      // Force clear the message after 3.5 seconds as a backup
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3500);
     } catch (err) {
       console.error("Delete expense error:", err);
       // If deletion fails, revert the optimistic update
