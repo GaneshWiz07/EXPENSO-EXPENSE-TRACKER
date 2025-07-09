@@ -13,22 +13,47 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// CORS Configuration
+// CORS Configuration for Production
 const corsOptions = {
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, Postman, etc.)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'https://expenso-9g2i.onrender.com',
+      'http://localhost:3000',
+      'http://localhost:3001'
+    ];
+    
+    // Allow any Render.com subdomain for development
+    if (origin.includes('.onrender.com') || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    return callback(new Error('Not allowed by CORS'));
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   allowedHeaders: [
     'Content-Type', 
     'Authorization', 
     'Access-Control-Allow-Methods', 
-    'Access-Control-Allow-Origin'
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Headers',
+    'Origin',
+    'X-Requested-With',
+    'Accept'
   ],
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  preflightContinue: false
 };
 
 // Middleware
 app.use(cors(corsOptions));
+
+// Handle preflight requests for all routes
+app.options('*', cors(corsOptions));
+
 app.use(express.json());
 
 // MongoDB Connection
@@ -51,9 +76,10 @@ async function startServer() {
     // Basic health check route
     app.get('/', (req, res) => {
       res.json({ 
-        message: 'AI Expense Tracker Backend is running', 
+        message: 'EXPENSO Backend is running', 
         status: 'healthy',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        cors: 'enabled'
       });
     });
 
@@ -74,7 +100,8 @@ async function startServer() {
 
     // Start server
     const server = app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      console.log(`EXPENSO Server running on port ${PORT}`);
+      console.log(`CORS enabled for origins:`, corsOptions.origin);
     });
 
     // Graceful shutdown
