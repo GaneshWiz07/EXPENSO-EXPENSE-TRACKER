@@ -116,7 +116,7 @@
   /* Date */
   text-align: center;
   min-width: 120px;
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+  font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", monospace;
 }
 
 .expense-table th:nth-child(7),
@@ -133,38 +133,80 @@
   min-width: 100px;
 }
 
-/* Enhanced Delete Button with Glassmorphism */
-.delete-btn {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(238, 82, 83, 0.8));
-  color: rgba(255, 255, 255, 0.95);
-  border: 1px solid rgba(255, 107, 107, 0.3);
-  padding: 10px 18px;
+/* Action Buttons */
+.delete-btn,
+.edit-btn {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  font-size: 0.9rem;
   font-weight: 600;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
+  margin: 0 5px;
+  padding: 8px 12px;
+  font-size: 1.1rem;
+}
+
+/* Edit Button */
+.edit-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(72, 219, 251, 0.8),
+    rgba(29, 209, 161, 0.8)
+  );
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(72, 219, 251, 0.3);
+  box-shadow: 0 4px 15px rgba(72, 219, 251, 0.2);
+}
+
+.edit-btn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(72, 219, 251, 1),
+    rgba(29, 209, 161, 1)
+  );
+  border-color: rgba(72, 219, 251, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(72, 219, 251, 0.3);
+}
+
+/* Delete Button */
+.delete-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.8),
+    rgba(238, 82, 83, 0.8)
+  );
+  color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
 }
 
 .delete-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
   transition: left 0.5s ease;
 }
 
 .delete-btn:hover {
-  background: linear-gradient(135deg, rgba(255, 107, 107, 1), rgba(238, 82, 83, 1));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 1),
+    rgba(238, 82, 83, 1)
+  );
   border-color: rgba(255, 107, 107, 0.5);
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
@@ -189,12 +231,141 @@
   opacity: 0.5;
 }
 
+/* Edit Expense Form */
+.edit-expense-form-container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.edit-expense-form-container h3 {
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 700;
+  position: relative;
+}
+
+.edit-expense-form-container h3:after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 80px;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+
+.edit-expense-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.edit-expense-form .form-group {
+  margin-bottom: 15px;
+}
+
+.edit-expense-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.edit-expense-form input,
+.edit-expense-form select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  font-size: 1rem;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.edit-expense-form input:focus,
+.edit-expense-form select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2);
+}
+
+.form-action-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.update-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(72, 219, 251, 0.8),
+    rgba(29, 209, 161, 0.8)
+  );
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.update-btn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(72, 219, 251, 1),
+    rgba(29, 209, 161, 1)
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(72, 219, 251, 0.3);
+}
+
+.cancel-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(200, 200, 200, 0.8),
+    rgba(150, 150, 150, 0.8)
+  );
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.cancel-btn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(200, 200, 200, 1),
+    rgba(150, 150, 150, 1)
+  );
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(150, 150, 150, 0.3);
+}
+
 /* Responsive table */
 @media screen and (max-width: 1024px) {
   .expense-list {
     padding: 0.5rem;
   }
-  
+
   .expense-table th,
   .expense-table td {
     padding: 12px;
@@ -222,13 +393,17 @@
 .loading::before,
 .error::before,
 .no-expenses::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   opacity: 0.5;
   pointer-events: none;
 }
@@ -370,13 +545,21 @@
 }
 
 .apply-filters-btn {
-  background: linear-gradient(135deg, rgba(74, 144, 226, 0.8), rgba(72, 219, 251, 0.8));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 0.8),
+    rgba(72, 219, 251, 0.8)
+  );
   color: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(74, 144, 226, 0.3);
 }
 
 .apply-filters-btn:hover {
-  background: linear-gradient(135deg, rgba(74, 144, 226, 1), rgba(72, 219, 251, 1));
+  background: linear-gradient(
+    135deg,
+    rgba(74, 144, 226, 1),
+    rgba(72, 219, 251, 1)
+  );
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
 }

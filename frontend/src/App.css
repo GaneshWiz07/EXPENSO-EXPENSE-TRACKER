@@ -228,7 +228,7 @@ html {
   opacity: 1;
 }
 
-/* AI Financial Tips Section - Enhanced */
+/* Financial Tips Section - Enhanced */
 .ai-insights-section {
   margin-top: 2.5rem;
   padding: 2rem;
@@ -913,7 +913,7 @@ button:disabled {
   background: var(--gradient-primary);
 }
 
-/* AI Insights Styling */
+/* Financial Insights Styling */
 .ai-insights {
   background: rgba(72, 219, 251, 0.1);
   backdrop-filter: blur(10px);

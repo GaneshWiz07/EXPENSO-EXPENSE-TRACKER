@@ -906,7 +906,7 @@ const getFinancialInsights = async (req, res) => {
           aiInsights = [
             {
               type: "ai",
-              title: "AI Spending Analysis",
+              title: "Spending Analysis",
               description: insights.recommendation,
               sentiment: insights.sentiment || "neutral",
             },
@@ -953,8 +953,7 @@ const getFinancialInsights = async (req, res) => {
     // If we still have no insights or only have generic ones, add more specific insights
     if (
       allInsights.length === 0 ||
-      (allInsights.length === 1 &&
-        allInsights[0].title === "AI Spending Analysis")
+      (allInsights.length === 1 && allInsights[0].title === "Spending Analysis")
     ) {
       // Check if we have an expense to analyze
       if (expenses.length > 0) {

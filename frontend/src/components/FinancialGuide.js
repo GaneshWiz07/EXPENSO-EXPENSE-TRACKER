@@ -198,7 +198,7 @@ const FinancialGuide = ({ expenses }) => {
           .map((insight, index) => (
             <div key={index} className="guide-card" data-type={insight.type}>
               <div className="guide-card-icon">
-                {insight.type === "ai" && "🤖"}
+                {insight.type === "ai" && "📈"}
                 {insight.type === "warning" && "⚠️"}
                 {insight.type === "saving" && "💰"}
                 {insight.type === "suggestion" && "💡"}
