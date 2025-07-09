@@ -61,27 +61,74 @@
   box-sizing: border-box;
 }
 
+/* Smooth Mesh Gradient Background */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background: linear-gradient(135deg, 
-    #667eea 0%, 
-    #764ba2 25%, 
-    #f093fb 50%, 
-    #f5576c 75%, 
-    #4facfe 100%);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
   min-height: 100vh;
   overflow-x: hidden;
   color: var(--text-color);
   line-height: 1.6;
   letter-spacing: 0.02em;
+  position: relative;
+  
+  /* Smooth Mesh Gradient Background */
+  background: linear-gradient(-45deg, 
+    #6366f1, #8b5cf6, #d946ef, #ec4899, 
+    #f97316, #eab308, #22c55e, #06b6d4);
+  background-size: 400% 400%;
+  animation: meshGradient 12s ease infinite;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Smooth mesh gradient animation */
+@keyframes meshGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 25%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 75%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating mesh particles overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 85% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
+  animation: floatMesh 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes floatMesh {
+  0%, 100% { 
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+  33% { 
+    transform: translateY(-15px) scale(1.02);
+    opacity: 0.8;
+  }
+  66% { 
+    transform: translateY(10px) scale(0.98);
+    opacity: 0.9;
+  }
 }
 
 /* Responsive Typography */
@@ -136,7 +183,7 @@ html {
   padding: 2rem;
 }
 
-/* Glassmorphism Card Styles */
+/* Enhanced Glassmorphism Card Styles */
 .card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);

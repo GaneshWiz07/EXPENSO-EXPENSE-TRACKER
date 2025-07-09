@@ -77,7 +77,7 @@ const Login = () => {
           <div className="auth-info">
             <p>✨ Track expenses with AI insights</p>
             <p>📊 Beautiful analytics and reports</p>
-            <p>💎 Glassmorphism design experience</p>
+
           </div>
         </div>
       </div>
