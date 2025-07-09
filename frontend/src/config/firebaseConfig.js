@@ -36,7 +36,7 @@ const firebaseAuthMethods = {
       return result.user;
     } catch (error) {
       console.error('Google Sign In Error:', error);
-      throw error;
+      throw error;Fixed
     }
   },
 
