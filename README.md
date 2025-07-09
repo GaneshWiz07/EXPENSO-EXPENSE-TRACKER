@@ -2,7 +2,7 @@
 
 Expenso is a modern expense tracking web application with a beautiful glassmorphism UI design, built using the MERN stack (MongoDB, Express, React, Node.js). It helps users track and manage their expenses with smart insights and analytics.
 
-![Expenso Screenshot](frontend/public/screenshot.png)
+**LIVE SITE** : [https://expenso-9g2i.onrender.com](https://expenso-9g2i.onrender.com)
 
 ## ✨ Features
 
