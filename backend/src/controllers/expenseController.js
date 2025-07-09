@@ -14,7 +14,7 @@ const formatIndianRupee = (amount) => {
   }).format(amount);
 };
 
-// Get expenses with advanced filtering
+// Get expenses with advanced filtering (USER-SPECIFIC)
 const getExpenses = async (req, res) => {
   try {
     const { 
@@ -27,8 +27,10 @@ const getExpenses = async (req, res) => {
       limit = 100 
     } = req.query;
 
-    // Build filter object
-    const filter = {};
+    // Build filter object - ALWAYS include userId
+    const filter = {
+      userId: req.user.uid // Filter by authenticated user
+    };
 
     // Category filter
     if (category) {
@@ -62,7 +64,7 @@ const getExpenses = async (req, res) => {
       sort: { date: -1 } // Sort by most recent first
     };
 
-    // Fetch expenses
+    // Fetch expenses for the authenticated user only
     const expenses = await Expense.find(filter, null, options);
     const totalExpenses = await Expense.countDocuments(filter);
 
@@ -84,7 +86,7 @@ const getExpenses = async (req, res) => {
   }
 };
 
-// Generate monthly report with filtering
+// Generate monthly report with filtering (USER-SPECIFIC)
 const generateMonthlyReport = async (req, res, skipFetch = false) => {
   try {
     const { 
@@ -95,8 +97,10 @@ const generateMonthlyReport = async (req, res, skipFetch = false) => {
       maxAmount 
     } = req.query;
 
-    // Build filter object dynamically
-    const filter = {};
+    // Build filter object dynamically - ALWAYS include userId
+    const filter = {
+      userId: req.user.uid // Filter by authenticated user
+    };
     
     // Category filter
     if (category) filter.category = category;
@@ -122,7 +126,7 @@ const generateMonthlyReport = async (req, res, skipFetch = false) => {
       filter.amount = { $lte: parseFloat(maxAmount) };
     }
 
-    // Fetch expenses with applied filters
+    // Fetch expenses with applied filters for the authenticated user only
     const expenses = skipFetch ? await Expense.find(filter) : await Expense.find(filter);
 
     // Calculate total expenses and category breakdown
@@ -218,7 +222,7 @@ const parseAIInsights = (aiText) => {
   };
 };
 
-// Create expense with AI insights
+// Create expense with AI insights (USER-SPECIFIC)
 const createExpense = async (req, res) => {
   try {
     console.log('Create Expense Request Body:', req.body);
@@ -242,14 +246,15 @@ const createExpense = async (req, res) => {
       });
     }
 
-    // Create new expense
+    // Create new expense with userId
     const newExpense = new Expense({
       description,
       amount,
       category,
       subcategory: subcategory || 'General',
       tags: tags || [],
-      paymentMethod
+      paymentMethod,
+      userId: req.user.uid // Associate with authenticated user
     });
 
     // Generate AI insights
@@ -287,12 +292,12 @@ const createExpense = async (req, res) => {
   }
 };
 
-// Get all expenses
+// Get all expenses for the authenticated user (USER-SPECIFIC)
 const getAllExpenses = async (req, res) => {
   try {
-    console.log('Fetching all expenses');
-    const expenses = await Expense.find();
-    console.log(`Found ${expenses.length} expenses`);
+    console.log('Fetching all expenses for user:', req.user.uid);
+    const expenses = await Expense.find({ userId: req.user.uid });
+    console.log(`Found ${expenses.length} expenses for user`);
     res.json(expenses);
   } catch (error) {
     console.error('Get Expenses Error:', error);
@@ -300,7 +305,7 @@ const getAllExpenses = async (req, res) => {
   }
 };
 
-// Delete an expense
+// Delete an expense (USER-SPECIFIC)
 const deleteExpense = async (req, res) => {
   try {
     const { id } = req.params;
@@ -321,8 +326,11 @@ const deleteExpense = async (req, res) => {
       });
     }
 
-    // Find and delete the expense
-    const deletedExpense = await Expense.findByIdAndDelete(id);
+    // Find and delete the expense (only if it belongs to the user)
+    const deletedExpense = await Expense.findOneAndDelete({ 
+      _id: id, 
+      userId: req.user.uid 
+    });
 
     if (!deletedExpense) {
       return res.status(404).json({ 
@@ -350,7 +358,7 @@ const deleteExpense = async (req, res) => {
   }
 };
 
-// Restore dashboard data function
+// Restore dashboard data function (USER-SPECIFIC)
 const getDashboardData = async (req, res) => {
   try {
     // Get current and previous month/year
@@ -365,8 +373,11 @@ const getDashboardData = async (req, res) => {
       prevYear--;
     }
 
-    // Calculate total expenses
+    // Calculate total expenses for the authenticated user
     const totalExpenses = await Expense.aggregate([
+      {
+        $match: { userId: req.user.uid }
+      },
       {
         $group: {
           _id: null,
@@ -375,12 +386,13 @@ const getDashboardData = async (req, res) => {
       }
     ]);
 
-    // Calculate monthly expenses (current month)
+    // Calculate monthly expenses (current month) for the authenticated user
     const [monthlyExpenses, prevMonthExpenses] = await Promise.all([
       // Current month expenses
       Expense.aggregate([
         {
           $match: {
+            userId: req.user.uid,
             $expr: {
               $and: [
                 { $eq: [{ $month: '$date' }, currentMonth] },
@@ -400,6 +412,7 @@ const getDashboardData = async (req, res) => {
       Expense.aggregate([
         {
           $match: {
+            userId: req.user.uid,
             $expr: {
               $and: [
                 { $eq: [{ $month: '$date' }, prevMonth] },
@@ -428,8 +441,11 @@ const getDashboardData = async (req, res) => {
       monthlyChange = 100; // 100% increase if no previous month data
     }
 
-    // Category Breakdown
+    // Category Breakdown for the authenticated user
     const categoryBreakdown = await Expense.aggregate([
+      {
+        $match: { userId: req.user.uid }
+      },
       {
         $group: {
           _id: '$category',
@@ -438,8 +454,8 @@ const getDashboardData = async (req, res) => {
       }
     ]);
 
-    // Recent Expenses (last 5)
-    const recentExpenses = await Expense.find()
+    // Recent Expenses (last 5) for the authenticated user
+    const recentExpenses = await Expense.find({ userId: req.user.uid })
       .sort({ date: -1 })
       .limit(5);
 
@@ -505,7 +521,7 @@ async function generateAIInsights(description, amount, category) {
   }
 }
 
-// Update an existing expense
+// Update an existing expense (USER-SPECIFIC)
 const updateExpense = async (req, res) => {
   try {
     const { id } = req.params;
@@ -537,9 +553,9 @@ const updateExpense = async (req, res) => {
       }
     });
 
-    // Perform update
-    const updatedExpense = await Expense.findByIdAndUpdate(
-      id, 
+    // Perform update (only if expense belongs to the user)
+    const updatedExpense = await Expense.findOneAndUpdate(
+      { _id: id, userId: req.user.uid },
       validUpdateData, 
       { 
         new: true,  // Return the updated document
