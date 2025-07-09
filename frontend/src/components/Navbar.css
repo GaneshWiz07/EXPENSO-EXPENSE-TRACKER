@@ -1,24 +1,22 @@
-/* Enhanced Glassmorphism Navbar */
+/* Glassmorphism Navbar */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: all 0.3s ease;
-  height: auto;
-  min-height: 70px;
 }
 
 .navbar-scrolled {
   background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
@@ -30,7 +28,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 70px;
 }
 
 .navbar-logo {
@@ -47,7 +44,7 @@
 .logo-icon {
   width: 32px;
   height: 32px;
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
   transition: transform 0.3s ease;
 }
 
@@ -56,36 +53,32 @@
 }
 
 .navbar-logo span {
-  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.9) 100%);
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: 1px;
-  font-weight: 800;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-links {
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .nav-link {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
-  padding: 0.7rem 1.3rem;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
   border-radius: 12px;
   transition: all 0.3s ease;
   font-size: 0.95rem;
   position: relative;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.08);
-  white-space: nowrap;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .nav-link::before {
@@ -111,15 +104,13 @@
   box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 1);
   border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.12);
 }
 
 .nav-link.active {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.15);
   color: rgba(255, 255, 255, 1);
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
-  font-weight: 700;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
 }
 
 .user-info {
@@ -127,20 +118,19 @@
   align-items: center;
   gap: 1rem;
   padding: 0.75rem 1.25rem;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
 }
 
 .user-info:hover {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-  border-color: rgba(255, 255, 255, 0.35);
 }
 
 .user-email {
@@ -160,69 +150,59 @@
 
 .user-email span > * {
   color: rgba(255, 255, 255, 0.95);
-  font-weight: 600;
 }
 
 .user-email small {
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 0.75em;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .google-icon {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   padding: 2px;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .logout-btn {
-  padding: 0.7rem 1.3rem;
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(238, 82, 83, 0.8));
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 700;
+  color: white;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 0.9rem;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-  white-space: nowrap;
 }
 
 .logout-btn:hover {
   background: linear-gradient(135deg, rgba(255, 107, 107, 1), rgba(238, 82, 83, 1));
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-  border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Mobile Responsive Design */
 @media (max-width: 768px) {
   .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    margin-bottom: 0;
+    position: relative;
+    margin-bottom: 1rem;
   }
 
   .navbar-content {
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-    min-height: auto;
   }
 
   .navbar-logo {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
   }
 
   .logo-icon {
@@ -231,34 +211,32 @@
   }
 
   .navbar-links {
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 0.5rem;
-    width: 100%;
   }
 
   .nav-link {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-    text-align: center;
-    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
   }
 
   .user-info {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     gap: 0.75rem;
-    width: 100%;
-    text-align: center;
+    width: auto;
+    justify-content: center;
+    padding: 0.6rem 1rem;
   }
 
   .user-email {
-    justify-content: center;
     font-size: 0.85rem;
   }
 
   .logout-btn {
-    padding: 0.6rem 1.5rem;
+    padding: 0.5rem 1rem;
     font-size: 0.85rem;
-    width: 100%;
   }
 }
 
@@ -268,15 +246,15 @@
   }
 
   .navbar-logo {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .nav-link {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
   }
 
   .user-info {
-    padding: 0.6rem 1rem;
+    padding: 0.5rem 0.8rem;
   }
 }

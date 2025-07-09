@@ -61,29 +61,28 @@
   box-sizing: border-box;
 }
 
-/* Static Background with Uploaded Image */
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background: linear-gradient(135deg, 
+    #667eea 0%, 
+    #764ba2 25%, 
+    #f093fb 50%, 
+    #f5576c 75%, 
+    #4facfe 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
   min-height: 100vh;
   overflow-x: hidden;
   color: var(--text-color);
   line-height: 1.6;
   letter-spacing: 0.02em;
-  position: relative;
-  
-  /* Static Geometric CSS Background */
-  background: 
-    linear-gradient(45deg, rgba(255, 192, 203, 0.3) 0%, transparent 50%),
-    linear-gradient(135deg, rgba(221, 160, 221, 0.4) 10%, transparent 60%),
-    linear-gradient(225deg, rgba(173, 216, 230, 0.3) 20%, transparent 70%),
-    linear-gradient(315deg, rgba(255, 218, 185, 0.4) 30%, transparent 80%),
-    linear-gradient(0deg, rgba(230, 230, 250, 0.5) 0%, rgba(255, 240, 245, 0.6) 100%);
-  background-size: 120% 120%, 100% 100%, 80% 80%, 60% 60%, 100% 100%;
-  background-position: -10% -10%, 110% 110%, 0% 100%, 100% 0%, 0% 0%;
-  background-attachment: fixed;
 }
 
-/* Removed all background animations for static design */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
 /* Responsive Typography */
 html {
@@ -137,7 +136,7 @@ html {
   padding: 2rem;
 }
 
-/* Enhanced Glassmorphism Card Styles */
+/* Glassmorphism Card Styles */
 .card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
@@ -1070,7 +1069,59 @@ button:disabled {
   margin-left: 5px;
 }
 
-/* Removed dynamic background particles */
+/* Dynamic Background Particles */
+@keyframes particleAnimation {
+  0% { 
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0.1;
+  }
+  50% { 
+    transform: translateY(-30px) rotate(180deg) scale(1.2);
+    opacity: 0.2;
+  }
+  100% { 
+    transform: translateY(0) rotate(360deg) scale(1);
+    opacity: 0.1;
+  }
+}
+
+.background-particle {
+  position: fixed;
+  background: radial-gradient(
+    circle at center, 
+    var(--primary-color), 
+    var(--secondary-color)
+  );
+  opacity: 0.1;
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: particleAnimation 15s infinite alternate;
+  z-index: -1;
+}
+
+.background-particle:nth-child(1) {
+  top: 10%;
+  left: 10%;
+  width: 200px;
+  height: 200px;
+  animation-delay: -2s;
+}
+
+.background-particle:nth-child(2) {
+  top: 70%;
+  right: 15%;
+  width: 250px;
+  height: 250px;
+  animation-delay: -4s;
+}
+
+.background-particle:nth-child(3) {
+  bottom: 20%;
+  left: 30%;
+  width: 180px;
+  height: 180px;
+  animation-delay: -6s;
+}
 
 /* Main Content Area */
 .main-content {
