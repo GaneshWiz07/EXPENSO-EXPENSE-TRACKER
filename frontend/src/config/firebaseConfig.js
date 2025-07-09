@@ -2,12 +2,8 @@ import { initializeApp } from 'firebase/app';
 import { 
   getAuth, 
   GoogleAuthProvider, 
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
-  sendPasswordResetEmail,
-  updateProfile
+  signOut
 } from 'firebase/auth';
 
 // Firebase configuration from .env
@@ -26,36 +22,13 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 
+// Set additional Google provider settings
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
+
 // Authentication Helper Functions
 const firebaseAuthMethods = {
-  // Create user with email and password
-  createUser: async (email, password, displayName) => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      
-      // Update profile with display name
-      if (displayName) {
-        await updateProfile(userCredential.user, { displayName });
-      }
-      
-      return userCredential.user;
-    } catch (error) {
-      console.error('Firebase Signup Error:', error);
-      throw error;
-    }
-  },
-
-  // Sign in with email and password
-  signIn: async (email, password) => {
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      return userCredential.user;
-    } catch (error) {
-      console.error('Firebase Login Error:', error);
-      throw error;
-    }
-  },
-
   // Google Sign In
   signInWithGoogle: async () => {
     try {
@@ -73,16 +46,6 @@ const firebaseAuthMethods = {
       await signOut(auth);
     } catch (error) {
       console.error('Firebase Signout Error:', error);
-      throw error;
-    }
-  },
-
-  // Password Reset
-  resetPassword: async (email) => {
-    try {
-      await sendPasswordResetEmail(auth, email);
-    } catch (error) {
-      console.error('Password Reset Error:', error);
       throw error;
     }
   }

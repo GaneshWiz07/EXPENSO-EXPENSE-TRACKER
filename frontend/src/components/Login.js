@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import '../styles/AuthForm.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login, signInWithGoogle, currentUser } = useAuth();
+  const { signInWithGoogle, currentUser } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -22,22 +20,6 @@ const Login = () => {
     }
   }, [currentUser, navigate, from]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    try {
-      setError('');
-      setLoading(true);
-      await login(email, password);
-      navigate(from);
-    } catch (err) {
-      console.error('Login error:', err);
-      setError('Failed to sign in. Please check your credentials.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleGoogleSignIn = async () => {
     try {
       setError('');
@@ -46,7 +28,18 @@ const Login = () => {
       navigate(from);
     } catch (err) {
       console.error('Google sign in error:', err);
-      setError('Failed to sign in with Google.');
+      
+      // Better error handling
+      let errorMessage = 'Failed to sign in with Google.';
+      if (err.code === 'auth/popup-closed-by-user') {
+        errorMessage = 'Sign-in was cancelled. Please try again.';
+      } else if (err.code === 'auth/popup-blocked') {
+        errorMessage = 'Pop-up was blocked. Please allow pop-ups and try again.';
+      } else if (err.code === 'auth/auth-domain-config-required') {
+        errorMessage = 'Authentication configuration error. Please contact support.';
+      }
+      
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -56,49 +49,17 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h2>Login to Expense Tracker</h2>
-          <p>Track your finances with ease and confidence</p>
+          <div className="auth-logo">
+            <img src="/logo.svg" alt="EXPENSO" className="auth-logo-img" />
+            <h1>EXPENSO</h1>
+          </div>
+          <h2>Welcome Back</h2>
+          <p>Sign in to continue tracking your expenses with AI-powered insights</p>
         </div>
 
         {error && <div className="error-message">{error}</div>}
 
-        <form onSubmit={handleSubmit} className="auth-form">
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-              required
-            />
-          </div>
-
-          <button 
-            type="submit" 
-            className="btn-primary" 
-            disabled={loading}
-          >
-            {loading ? 'Logging in...' : 'Login'}
-          </button>
-
-          <div className="auth-divider">
-            <span>or</span>
-          </div>
-
+        <div className="auth-form">
           <button
             type="button"
             onClick={handleGoogleSignIn}
@@ -110,13 +71,14 @@ const Login = () => {
               alt="Google"
               className="google-icon"
             />
-            Sign in with Google
+            {loading ? 'Signing in...' : 'Continue with Google'}
           </button>
-        </form>
 
-        <div className="auth-footer">
-          Don't have an account? 
-          <Link to="/signup" className="auth-link">Sign Up</Link>
+          <div className="auth-info">
+            <p>✨ Track expenses with AI insights</p>
+            <p>📊 Beautiful analytics and reports</p>
+            <p>💎 Glassmorphism design experience</p>
+          </div>
         </div>
       </div>
     </div>
