@@ -1,0 +1,35 @@
+{
+  "name": "expense-tracker-backend",
+  "version": "1.0.0",
+  "description": "Backend for AI Expense Tracker",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "build":"npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "expense",
+    "tracker",
+    "ai",
+    "finance"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.3.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "firebase-admin": "^13.2.0",
+    "mongoose": "^7.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

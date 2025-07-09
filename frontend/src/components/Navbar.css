@@ -1,0 +1,260 @@
+/* Glassmorphism Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar-scrolled {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.navbar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover .logo-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.navbar-logo span {
+  background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav-link:hover::before,
+.nav-link.active::before {
+  opacity: 1;
+}
+
+.nav-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-link.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.user-info:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.user-email {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 600;
+}
+
+.user-email span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.user-email span > * {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.user-email small {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75em;
+  font-weight: 400;
+}
+
+.google-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logout-btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.8), rgba(238, 82, 83, 0.8));
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.logout-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 1), rgba(238, 82, 83, 1));
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  .navbar-content {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .navbar-logo {
+    font-size: 1.3rem;
+  }
+
+  .logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .navbar-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .user-info {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    width: auto;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+  }
+
+  .user-email {
+    font-size: 0.85rem;
+  }
+
+  .logout-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-content {
+    padding: 0.75rem;
+  }
+
+  .navbar-logo {
+    font-size: 1.2rem;
+  }
+
+  .nav-link {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .user-info {
+    padding: 0.5rem 0.8rem;
+  }
+}
