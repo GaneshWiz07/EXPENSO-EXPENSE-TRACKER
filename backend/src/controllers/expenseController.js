@@ -163,12 +163,10 @@ const generateMonthlyReport = async (req, res, skipFetch = false) => {
     };
   } catch (error) {
     console.error("Error generating monthly report:", error);
-    res
-      .status(500)
-      .json({
-        message: "Failed to generate monthly report",
-        error: error.message,
-      });
+    res.status(500).json({
+      message: "Failed to generate monthly report",
+      error: error.message,
+    });
   }
 };
 
@@ -640,6 +638,143 @@ async function generateAIInsights(description, amount, category) {
   }
 }
 
+// Generate insights without using external AI APIs
+function generateLocalAIInsights(description, amount, category) {
+  console.log("Generating Local AI Insights");
+
+  // Convert to lowercase for easier comparison
+  const lowerCategory = category ? category.toLowerCase() : "";
+  const lowerDescription = description ? description.toLowerCase() : "";
+
+  // Specific insights based on category and expense
+  // Shopping/Clothing
+  if (
+    lowerCategory.includes("shopping") ||
+    lowerCategory.includes("clothing") ||
+    lowerCategory.includes("footwear")
+  ) {
+    // Shoes
+    if (
+      lowerDescription.includes("shoe") ||
+      lowerDescription.includes("sneaker") ||
+      lowerDescription.includes("footwear")
+    ) {
+      if (amount <= 2000) {
+        return {
+          sentiment: "positive",
+          recommendation: `Your ${description} purchase of ₹${amount} is quite economical. Quality footwear at this price point can be a good value, but make sure they'll last long enough to justify the cost.`,
+        };
+      } else if (amount <= 5000) {
+        return {
+          sentiment: "neutral",
+          recommendation: `Your ${description} purchase of ₹${amount} is reasonable for quality footwear. Consider this an investment in your comfort and health, as good shoes can prevent foot problems.`,
+        };
+      } else {
+        return {
+          sentiment: "neutral",
+          recommendation: `Your ${description} purchase of ₹${amount} is in the premium range. For high-end footwear, consider the cost-per-wear - how frequently you'll use them and how long they'll last.`,
+        };
+      }
+    }
+
+    // Bags
+    if (
+      lowerDescription.includes("bag") ||
+      lowerDescription.includes("purse") ||
+      lowerDescription.includes("backpack")
+    ) {
+      if (amount <= 3000) {
+        return {
+          sentiment: "positive",
+          recommendation: `Your ${description} purchase of ₹${amount} is reasonable. Practical bags can last for years, making this a good long-term investment.`,
+        };
+      } else if (amount <= 10000) {
+        return {
+          sentiment: "neutral",
+          recommendation: `Your ${description} purchase of ₹${amount} is significant. For premium bags, consider if this fits within your discretionary spending budget and if the quality justifies the higher price.`,
+        };
+      } else {
+        return {
+          sentiment: "negative",
+          recommendation: `Your ${description} purchase of ₹${amount} is in the luxury category. While quality accessories can last for years, consider whether this expense aligns with your overall financial goals.`,
+        };
+      }
+    }
+
+    // Other clothing
+    if (
+      lowerDescription.includes("shirt") ||
+      lowerDescription.includes("pant") ||
+      lowerDescription.includes("cloth") ||
+      lowerDescription.includes("dress")
+    ) {
+      return {
+        sentiment: "neutral",
+        recommendation: `Your clothing purchase of ₹${amount} for ${description} can be part of a thoughtful wardrobe strategy. Consider building a versatile collection with fewer, quality items rather than many cheaper ones.`,
+      };
+    }
+  }
+
+  // Food/Groceries
+  else if (
+    lowerCategory.includes("food") ||
+    lowerCategory.includes("grocery")
+  ) {
+    if (amount <= 1000) {
+      return {
+        sentiment: "positive",
+        recommendation: `Your ${description} expense of ₹${amount} is reasonable. For regular food expenses, meal planning can help optimize your budget further while reducing waste.`,
+      };
+    } else if (amount <= 3000) {
+      return {
+        sentiment: "neutral",
+        recommendation: `Your ${description} expense of ₹${amount} is moderate. Consider buying staples in bulk and preparing more meals at home to manage your food budget effectively.`,
+      };
+    } else {
+      return {
+        sentiment: "negative",
+        recommendation: `Your ${description} expense of ₹${amount} is relatively high. Try buying in bulk, using discounts, or opting for seasonal items to save on food expenses without sacrificing nutrition.`,
+      };
+    }
+  }
+
+  // Healthcare
+  else if (
+    lowerCategory.includes("health") ||
+    lowerCategory.includes("medical")
+  ) {
+    return {
+      sentiment: "neutral",
+      recommendation: `Your healthcare expense of ₹${amount} for ${description} is an important investment in your wellbeing. Consider if you're maximizing insurance benefits and preventative care to minimize long-term costs.`,
+    };
+  }
+
+  // Utilities
+  else if (
+    lowerCategory.includes("utility") ||
+    lowerCategory.includes("bill")
+  ) {
+    return {
+      sentiment: "neutral",
+      recommendation: `Your ${description} expense of ₹${amount} is a necessity. To optimize utility costs, review your usage patterns and consider energy-efficient alternatives where possible.`,
+    };
+  }
+
+  // Entertainment
+  else if (lowerCategory.includes("entertainment")) {
+    return {
+      sentiment: "neutral",
+      recommendation: `For entertainment expenses like ${description}, consider setting a monthly budget of 5-10% of your income. Look for free or low-cost alternatives occasionally to balance enjoyment with savings.`,
+    };
+  }
+
+  // Default response if no specific category matches
+  return {
+    sentiment: "neutral",
+    recommendation: `I've analyzed your ${description} expense of ₹${amount}. For better financial insights, categorize your expenses consistently and review them monthly to identify patterns and savings opportunities.`,
+  };
+}
+
 // Update an existing expense (USER-SPECIFIC)
 const updateExpense = async (req, res) => {
   try {
@@ -756,7 +891,11 @@ const getFinancialInsights = async (req, res) => {
 
     try {
       // Only try to generate AI insights if we have a valid Gemini API key
-      if (process.env.GEMINI_API_KEY) {
+      if (
+        process.env.GEMINI_API_KEY &&
+        process.env.GEMINI_API_KEY !== "your_actual_gemini_api_key_here"
+      ) {
+        console.log("Using Gemini API for insights");
         const insights = await generateAIInsights(
           recentExpense.description,
           recentExpense.amount,
@@ -773,6 +912,27 @@ const getFinancialInsights = async (req, res) => {
             },
           ];
         }
+      } else {
+        // Log that we're using the local implementation
+        console.log(
+          "No valid Gemini API key found. Using local implementation for insights."
+        );
+
+        // If no API key, use our enhanced local implementation with a clear label
+        const insights = generateLocalAIInsights(
+          recentExpense.description,
+          recentExpense.amount,
+          recentExpense.category
+        );
+
+        aiInsights = [
+          {
+            type: "ai",
+            title: "Spending Analysis",
+            description: insights.recommendation,
+            sentiment: insights.sentiment || "neutral",
+          },
+        ];
       }
     } catch (aiError) {
       console.error("Error generating AI insights:", aiError);
@@ -1096,6 +1256,7 @@ export default {
   deleteExpense,
   generateMonthlyReport,
   generateAIInsights,
+  generateLocalAIInsights,
   getDashboardData,
   updateExpense,
   getFinancialInsights,
