@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
@@ -563,11 +569,6 @@ const ExpenseList = () => {
 
     if (!currentExpense) return;
 
-    // Clear any existing success message timeouts
-    if (window.successMessageTimeout) {
-      clearTimeout(window.successMessageTimeout);
-    }
-
     try {
       setLoading(true);
       setErrorMessage("");
@@ -589,20 +590,8 @@ const ExpenseList = () => {
 
       // Close the edit form
       setEditMode(false);
-      setCurrentExpense(null);
-
-      // Update monthly report after successful update
+      setCurrentExpense(null); // Update monthly report after successful update
       await fetchMonthlyReport();
-
-      // Clear success message after 3 seconds
-      window.successMessageTimeout = setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000);
-
-      // Force clear the message after 3.5 seconds as a backup
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 3500);
     } catch (err) {
       console.error("Update expense error:", err);
       setErrorMessage("Failed to update expense. Please try again.");
@@ -610,15 +599,9 @@ const ExpenseList = () => {
       setLoading(false);
     }
   };
-
   const handleDelete = async (expenseId) => {
     if (!window.confirm("Are you sure you want to delete this expense?")) {
       return;
-    }
-
-    // Clear any existing success message timeouts
-    if (window.successMessageTimeout) {
-      clearTimeout(window.successMessageTimeout);
     }
 
     try {
@@ -636,20 +619,8 @@ const ExpenseList = () => {
       await expenseApi.deleteExpense(expenseId);
 
       // Show success message
-      setSuccessMessage("Expense deleted successfully!");
-
-      // Update monthly report after successful deletion
+      setSuccessMessage("Expense deleted successfully!"); // Update monthly report after successful deletion
       await fetchMonthlyReport();
-
-      // Clear success message after 3 seconds
-      window.successMessageTimeout = setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000);
-
-      // Force clear the message after 3.5 seconds as a backup
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 3500);
     } catch (err) {
       console.error("Delete expense error:", err);
       // If deletion fails, revert the optimistic update
@@ -659,6 +630,19 @@ const ExpenseList = () => {
       setLoading(false);
     }
   };
+
+  // Add a new useEffect to handle the success message timeout
+  useEffect(() => {
+    // If there is a success message, set a timeout to clear it
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
+
+      // Clear the timeout when the component unmounts or successMessage changes
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
 
   return (
     <div className="expense-list-container">
