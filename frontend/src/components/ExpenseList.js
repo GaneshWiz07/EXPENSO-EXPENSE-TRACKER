@@ -539,19 +539,6 @@ const ExpenseList = () => {
     </div>
   );
 
-  if (!currentUser) {
-    return null;
-  }
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p>Loading your expenses...</p>
-      </div>
-    );
-  }
-
   const handleEdit = (expense) => {
     setCurrentExpense(expense);
     setEditMode(true);
@@ -585,8 +572,8 @@ const ExpenseList = () => {
       // Update the expenses list
       await fetchExpenses();
 
-      // Show success message
-      setSuccessMessage("Expense updated successfully!");
+      // Don't show a success message for updates
+      setSuccessMessage("");
 
       // Close the edit form
       setEditMode(false);
@@ -599,6 +586,7 @@ const ExpenseList = () => {
       setLoading(false);
     }
   };
+
   const handleDelete = async (expenseId) => {
     if (!window.confirm("Are you sure you want to delete this expense?")) {
       return;
@@ -618,8 +606,8 @@ const ExpenseList = () => {
       // Then make the API call
       await expenseApi.deleteExpense(expenseId);
 
-      // Show success message
-      setSuccessMessage("Expense deleted successfully!"); // Update monthly report after successful deletion
+      // Don't show a success message for deletion
+      setSuccessMessage(""); // Update monthly report after successful deletion
       await fetchMonthlyReport();
     } catch (err) {
       console.error("Delete expense error:", err);
@@ -643,6 +631,19 @@ const ExpenseList = () => {
       return () => clearTimeout(timer);
     }
   }, [successMessage]);
+
+  if (!currentUser) {
+    return null;
+  }
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p>Loading your expenses...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="expense-list-container">
