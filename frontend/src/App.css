@@ -2055,6 +2055,16 @@ nav a:hover {
   font-size: 1.1rem;
 }
 
+.guide-subtitle .increase {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.guide-subtitle .decrease {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
 /* Loading Spinner */
 .loading-container {
   display: flex;
